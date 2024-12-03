@@ -14,6 +14,6 @@ export class ConverterComponent {
   fromCurrency: string = "ILS";
   toCurrency: string = "USD";
   result: number | null = null;
-  currencies:string[]=["ILS",'EUR', 'USD', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY'];
-  
+  currencies: string[] = ["ILS", 'EUR', 'USD', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY'];/**@todo: get currencies List from api */
+
 }
