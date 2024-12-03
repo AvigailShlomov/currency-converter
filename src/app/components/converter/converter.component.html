@@ -11,7 +11,7 @@
             </option>
         </select>
 
-        <label for=to">To</label>
+        <label for="to">To</label>
         <select id="toCurrency">
             <option *ngFor="let currency of currencies" [value]="currency">
                 {{currency}}
@@ -24,7 +24,7 @@
         </button>
     </div>
 
-    <div *ngIf="hasResult">
+    <div *ngIf="result">
         <h3>Result</h3>
         <p>
             {{amount}} {{fromCurrency}} = {{result}} {{toCurrency}}
