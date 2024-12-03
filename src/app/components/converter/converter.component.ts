@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CurrencyService } from '../../services/currency.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-converter',
@@ -17,16 +18,26 @@ export class ConverterComponent {
   result: number | null = null;
   currencies: string[] = ["ILS", 'EUR', 'USD', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY'];/**@todo: get currencies List from api */
 
-  constructor(private currerncyService: CurrencyService) { }
+  constructor(private currerncyService: CurrencyService,
+    private storageService: StorageService
+  ) { }
 
   convert() {
     this.currerncyService.convertCurrency(this.fromCurrency, this.toCurrency, this.amount)
       .subscribe({
         next: ((res) => {
           this.result = res.rates[this.toCurrency];
-          //@todo: save to local storage
+          this.storageService.saveConvertion(
+            {
+              amount: this.amount,
+              from: this.fromCurrency,
+              to: this.toCurrency,
+              result: this.result,
+              date: new Date()
+            }
+          )
         }
-      ),
+        ),
         error: ((err) => alert("Error Wilte fetching currency conversion"))
       })
     return;
