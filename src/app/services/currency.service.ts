@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CurrencyService {
-  baseUrl = "https://api.frankfurter.dev/v1";
+  private baseUrl = "https://api.frankfurter.dev/v1";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  convertCurrency(from: string, to: string, amount: number) :Observable<any> { /**@todo: add coversionResultModel */
+  convertCurrency(from: string, to: string, amount: number) :Observable<any> { /**@todo: add coversionResultModel */   
     return this.http.get<any>(`${this.baseUrl}/latest?amount=${amount}&base=${from}&symbols=${to}`);
    }
 }
