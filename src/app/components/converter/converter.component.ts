@@ -22,7 +22,12 @@ export class ConverterComponent {
   convert() {
     this.currerncyService.convertCurrency(this.fromCurrency, this.toCurrency, this.amount)
       .subscribe({
-        next: ((res) => this.result = res.rates[this.toCurrency]),
+        next: ((res) => {
+          this.result = res.rates[this.toCurrency];
+          // save to local storage
+        }
+
+      ),
         error: ((err) => alert("Error Wilte fetching currency conversion"))
       })
     return;
