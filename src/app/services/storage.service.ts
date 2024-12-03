@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { converterResponse } from '../models/currency.models';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,12 @@ export class StorageService {
 
   constructor() { }
 
-  saveConvertion(){
+  saveConvertion() {
     //save new convertion 
   }
-  getHistory(){
-//get all past conversions 
+  getHistory(): converterResponse[] {
+    const history: string | null = localStorage.getItem(this.stroage_key);
+    return history ? JSON.parse(history) : []
   }
 
 }

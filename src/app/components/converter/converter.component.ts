@@ -24,9 +24,8 @@ export class ConverterComponent {
       .subscribe({
         next: ((res) => {
           this.result = res.rates[this.toCurrency];
-          // save to local storage
+          //@todo: save to local storage
         }
-
       ),
         error: ((err) => alert("Error Wilte fetching currency conversion"))
       })
