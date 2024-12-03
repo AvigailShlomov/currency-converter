@@ -1,1 +1,10 @@
-<p>history works!</p>
+<div>
+    <h3>Conversions History</h3>
+    <div *ngIf="conversionHistory">
+
+    <div *ngFor="let item of conversionHistory">
+        <p>{{item.amount}} {{item.from}} = {{item.amount}} {{item.to}}</p>
+        <p>{{item.date | date :'YYYY-MM-dd hh:mm:ss'}}</p>
+    </div>
+    </div>
+</div>
