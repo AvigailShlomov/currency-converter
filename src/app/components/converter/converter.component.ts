@@ -23,6 +23,8 @@ export class ConverterComponent {
   ) { }
 
   convert() {
+    if (this.amount <= 0)
+      return;
     this.currerncyService.convertCurrency(this.fromCurrency, this.toCurrency, this.amount)
       .subscribe({
         next: ((res) => {
@@ -35,8 +37,7 @@ export class ConverterComponent {
               result: this.result,
               date: new Date()
             }
-          )
-        }
+          )}
         ),
         error: ((err) => alert("Error Wilte fetching currency conversion"))
       })
