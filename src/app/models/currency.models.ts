@@ -5,3 +5,11 @@ export interface converterResponse {
     rates: { [key: string]: number };
 }
 
+export interface ConversionForStorage {
+    amount: number;
+    from: string;
+    to: string;
+    result: number;
+    date: Date;
+  }
+
