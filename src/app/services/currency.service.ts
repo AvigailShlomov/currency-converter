@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +10,7 @@ export class CurrencyService {
 
   constructor(private http: HttpClient) { }
 
-  convertCurrency(from: string, to: string, amount: number) {
-
-    // fetch(`${this.baseUrl}/latest?base=${from}&symbols=${to}`)
-    //   .then((resp) => resp.json())
-    //   .then((data) => {
-    //     const convertedAmount = (amount * data.rates[to]).toFixed(2);
-    //     alert(`${amount} ${from} = ${convertedAmount} ${to}`);
-    //   });
-  }
+  convertCurrency(from: string, to: string, amount: number) :Observable<any> { /**@todo: add coversionResultModel */
+    return this.http.get<any>(`${this.baseUrl}/latest?amount=${amount}&base=${from}&symbols=${to}`);
+   }
 }
