@@ -11,7 +11,7 @@ export class CurrencyService {
 
   constructor(private http: HttpClient) {}
 
-  convertCurrency(from: string, to: string, amount: number) :Observable<converterResponse> { /**@todo: add coversionResultModel */   
+  convertCurrency(from: string, to: string, amount: number) :Observable<converterResponse> {  
     return this.http.get<any>(`${this.baseUrl}/latest?amount=${amount}&base=${from}&symbols=${to}`);
    }
 }
