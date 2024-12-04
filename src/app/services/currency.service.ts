@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { converterResponse } from '../models/currency.models';
+import { converterResponse, HistoricalRates } from '../models/currency.models';
 
 @Injectable({
   providedIn: 'root'
@@ -15,18 +15,18 @@ export class CurrencyService {
     return this.http.get<any>(`${this.baseUrl}/latest?amount=${amount}&base=${from}&symbols=${to}`);
   }
 
-  getHistoricalRates() {
-    const pastWeekDateRange= this.pastWeekDateRange();
-
-
+  getHistoricalRates(fromCurr: string, toCurr: string): Observable<HistoricalRates> {
+    const pastWeekDateRange = this.pastWeekDateRange();
+    return this.http.get<HistoricalRates>(
+      `${this.baseUrl}/${pastWeekDateRange.todayDate}..${pastWeekDateRange.lastWeekDate}&base=${fromCurr}&symbols=${toCurr}`
+    );
   }
-  //https://api.frankfurter.dev/v1/2024-01-01..2024-01-02?symbols=USD&base=ILS
 
   /**@todo: maybe move to utils */
   private pastWeekDateRange(): { todayDate: Date, lastWeekDate: Date } {
-    const todayDate = new Date();
+    const today = new Date();
     let lastWeekDate = new Date();
-    lastWeekDate.setDate(todayDate.getDate() - 7);
-    return { todayDate, lastWeekDate };
+    lastWeekDate.setDate(today.getDate() - 7);
+    return { todayDate: today, lastWeekDate };
   }
 }
