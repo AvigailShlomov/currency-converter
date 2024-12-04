@@ -14,16 +14,9 @@ export class StorageService {
     return history ? JSON.parse(history) : []
   }
 
-  saveConvertion(newConversion: ConversionForStorage) {
-    console.log("got to save conversion");
-    
+  saveConvertion(newConversion: ConversionForStorage) { 
     const history = this.getHistory();
-    const allConversions = [newConversion, ...history]
-    console.log("allConversions: ",allConversions);
-    
-    localStorage.setItem(this.stroage_key, JSON.stringify(allConversions))
-    console.log("localStorage: ", localStorage);
-    
-    //save new convertion 
+    const allConversions = [newConversion, ...history]    
+    localStorage.setItem(this.stroage_key, JSON.stringify(allConversions))   
   }
 }
