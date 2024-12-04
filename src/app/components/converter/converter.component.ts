@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CurrencyService } from '../../services/currency.service';
 import { StorageService } from '../../services/storage.service';
+import { RateChartComponent } from '../rate-chart/rate-chart.component';
 
 @Component({
   selector: 'app-converter',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RateChartComponent],
   templateUrl: './converter.component.html',
   styleUrl: './converter.component.css'
 })
@@ -37,7 +38,8 @@ export class ConverterComponent {
               result: this.result,
               date: new Date()
             }
-          )}
+          )
+        }
         ),
         error: ((err) => alert("Error Wilte fetching currency conversion"))
       })
