@@ -11,5 +11,16 @@ export interface ConversionForStorage {
     to: string;
     result: number;
     date: Date;
-  }
+}
+
+export interface HistoricalRates {
+    base: string;
+    start_date: string,
+    end_date: string,
+    rates: {
+        [key: string]: {
+            [currency: string]: number
+        }
+    };
+}
 
