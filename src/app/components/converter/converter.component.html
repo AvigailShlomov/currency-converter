@@ -5,14 +5,14 @@
         <input type="number" [(ngModel)]="amount" min="0" step="0.1" />
 
         <label for="from">From</label>
-        <select id="fromCurrency">
+        <select id="fromCurrency" [(ngModel)]="fromCurrency">
             <option *ngFor="let currency of currencies" [value]="currency">
                 {{currency}}
             </option>
         </select>
 
         <label for="to">To</label>
-        <select id="toCurrency">
+        <select id="toCurrency" [(ngModel)]="toCurrency">
             <option *ngFor="let currency of currencies" [value]="currency">
                 {{currency}}
             </option>
@@ -31,7 +31,9 @@
         </p>
     </div>
   
-
+<div>
+    <h1>{{fromCurrency}} To {{toCurrency}} Rate Chart</h1>
+</div>
     
 <!-- <app-rate-chart [fromCurrency]="fromCurrency" [toCurrency]="toCurrency"></app-rate-chart> -->
 </div>
