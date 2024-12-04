@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { converterResponse, HistoricalRates } from '../models/currency.models';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CurrencyService {
   private baseUrl = "https://api.frankfurter.dev/v1";
@@ -16,17 +17,32 @@ export class CurrencyService {
   }
 
   getHistoricalRates(fromCurr: string, toCurr: string): Observable<HistoricalRates> {
-    const pastWeekDateRange = this.pastWeekDateRange();
+    const dateFrom = this.lastWeekDate();
+
     return this.http.get<HistoricalRates>(
-      `${this.baseUrl}/${pastWeekDateRange.todayDate}..${pastWeekDateRange.lastWeekDate}&base=${fromCurr}&symbols=${toCurr}`
+      `${this.baseUrl}/${dateFrom}..?base=${fromCurr}&symbols=${toCurr}`
     );
   }
 
-  /**@todo: maybe move to utils */
-  private pastWeekDateRange(): { todayDate: Date, lastWeekDate: Date } {
-    const today = new Date();
+  /**@todo: maybe move to utils*/
+  private lastWeekDate(): string {
     let lastWeekDate = new Date();
-    lastWeekDate.setDate(today.getDate() - 7);
-    return { todayDate: today, lastWeekDate };
+    lastWeekDate.setDate(new Date().getDate() - 7);
+
+    return this.formatDate(lastWeekDate);
+  }
+
+  private formatDate(date: Date): string {
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2)
+      month = '0' + month;
+    if (day.length < 2)
+      day = '0' + day;
+
+    return [year, month, day].join('-');
   }
 }
